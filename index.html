@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VantageFree™</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(to bottom, #f0f4f8, #ffffff);
+            color: #1a365d;
+        }
+
+        .language-switch {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.2s;
+            font-size: 14px;
+        }
+
+        .language-switch:hover {
+            transform: translateY(-1px);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            text-align: center;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            letter-spacing: -0.5px;
+        }
+
+        .tagline {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            color: #4a5568;
+        }
+
+        .mascots {
+            font-size: 3rem;
+            margin: 2rem 0;
+            letter-spacing: 1rem;
+        }
+
+        .launch-date {
+            font-size: 1.1rem;
+            color: #4a5568;
+            margin-bottom: 2rem;
+        }
+
+        .copyright {
+            text-align: center;
+            padding: 20px;
+            color: #718096;
+            font-size: 0.875rem;
+        }
+
+        .fade {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.8s forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        [data-lang] {
+            transition: opacity 0.3s;
+        }
+
+        [data-lang]:not(.active) {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="language-switch" onclick="toggleLanguage()">
+        <span data-lang="fr" class="active">EN</span>
+        <span data-lang="en">FR</span>
+    </div>
+
+    <div class="container">
+        <h1 class="fade">VantageFree™</h1>
+        
+        <div data-lang="fr" class="active fade">
+            <p class="tagline">Démocratiser l'information et la formation</p>
+        </div>
+        <div data-lang="en" class="fade">
+            <p class="tagline">Democratizing information and education</p>
+        </div>
+
+        <div class="mascots fade">
+            🐱 🐶 🐰 🐦
+        </div>
+
+        <div data-lang="fr" class="active fade">
+            <p class="launch-date">Lancement imminent • Hiver 2024/2025</p>
+        </div>
+        <div data-lang="en" class="fade">
+            <p class="launch-date">Coming soon • Winter 2024/2025</p>
+        </div>
+    </div>
+
+    <div class="copyright">
+        <div data-lang="fr" class="active">
+            © 2024 VantageFree™. Tous droits réservés.<br>
+            Toute reproduction ou utilisation non autorisée est strictement interdite.
+        </div>
+        <div data-lang="en">
+            © 2024 VantageFree™. All rights reserved.<br>
+            Any unauthorized reproduction or use is strictly prohibited.
+        </div>
+    </div>
+
+    <script>
+        function toggleLanguage() {
+            const currentLang = document.documentElement.lang;
+            const newLang = currentLang === 'fr' ? 'en' : 'fr';
+            document.documentElement.lang = newLang;
+
+            document.querySelectorAll('[data-lang]').forEach(el => {
+                const isCurrentLang = el.getAttribute('data-lang') === newLang;
+                el.classList.toggle('active', isCurrentLang);
+            });
+        }
+
+        // Protection contre le clic droit et la sélection
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('selectstart', e => e.preventDefault());
+    </script>
+</body>
+</html>
